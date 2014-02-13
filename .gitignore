@@ -12,5 +12,8 @@
 *.la
 *.a
 
+# Xcode
+*.xcuserstate
+
 tetris/depend
 tetris/tetris
