@@ -6,25 +6,18 @@
 //  Copyright (c) 2014 rui. All rights reserved.
 //
 
-#include "game.h"
+#include "Game.h"
+#include "constants.h"
 #include "include/Angel.h"
-
-const int NUM_OF_H_BLOCKS = 20;
-const int NUM_OF_H_LINES = NUM_OF_H_BLOCKS + 1;
-const int NUM_OF_H_POINTS = NUM_OF_H_LINES * 2;
-const int NUM_OF_V_BLOCKS = 10;
-const int NUM_OF_V_LINES = NUM_OF_V_BLOCKS + 1;
-const int NUM_OF_V_POINTS = NUM_OF_V_LINES * 2;
-const int NUM_OF_MISC_POINTS = 200;
-
-const float H = 0.9;
-const float W = 0.82;
 
 Game *Game::singleton = NULL;
 
 void Game::run(int argc, char **argv)
 {
     singleton = this;
+    
+    current_tetromino.reset();
+    current_tetromino.interval = 1000;
     
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_3_2_CORE_PROFILE | GLUT_RGBA | GLUT_DOUBLE);
@@ -52,18 +45,13 @@ void Game::init()
     
     vec2 points[NUM_OF_H_POINTS + NUM_OF_V_POINTS + NUM_OF_MISC_POINTS];
     for (int i = 0; i < NUM_OF_H_LINES; ++i) {
-        points[i * 2    ] = vec2(-W, -H + H / 10 * i);
-        points[i * 2 + 1] = vec2( W, -H + H / 10 * i);
+        points[i * 2    ] = vec2(-W, -H + BLOCK_H * i);
+        points[i * 2 + 1] = vec2( W, -H + BLOCK_H * i);
     }
     for (int i = 0; i < NUM_OF_V_LINES; ++i) {
-        points[NUM_OF_H_POINTS + i * 2    ] = vec2(-W + W / 5 * i, -H);
-        points[NUM_OF_H_POINTS + i * 2 + 1] = vec2(-W + W / 5 * i,  H);
+        points[NUM_OF_H_POINTS + i * 2    ] = vec2(-W + BLOCK_W * i, -H);
+        points[NUM_OF_H_POINTS + i * 2 + 1] = vec2(-W + BLOCK_W * i,  H);
     }
-    
-    points[NUM_OF_H_POINTS + NUM_OF_V_POINTS    ] = vec2(-0.5, -0.5);
-    points[NUM_OF_H_POINTS + NUM_OF_V_POINTS + 1] = vec2( 0.5, -0.5);
-    points[NUM_OF_H_POINTS + NUM_OF_V_POINTS + 2] = vec2(-0.5,  0.5);
-    points[NUM_OF_H_POINTS + NUM_OF_V_POINTS + 3] = vec2( 0.5,  0.5);
     
     GLuint vbo;
     glGenBuffers(1, &vbo);
@@ -93,7 +81,7 @@ void Game::display()
     
     // TODO: Draw current tetromino
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-    glDrawArrays(GL_TRIANGLE_STRIP, NUM_OF_H_POINTS + NUM_OF_V_POINTS, 4);
+    glDrawArrays(GL_TRIANGLE_STRIP, NUM_OF_H_POINTS + NUM_OF_V_POINTS, singleton->current_tetromino.num_of_points());
     
     glutSwapBuffers();
 }
@@ -109,12 +97,7 @@ void Game::keyboard(unsigned char key, int x, int y)
 
 void Game::idle()
 {
-    vec2 points[4];
-    points[0] = vec2(-0.5, -1 + 0.01 * singleton->elapsed());
-    points[1] = vec2( 0.5, -1 + 0.01 * singleton->elapsed());
-    points[2] = vec2(-0.5, -0.8 + 0.01 * singleton->elapsed());
-    points[3] = vec2( 0.5, -0.8 + 0.01 * singleton->elapsed());
-    glBufferSubData(GL_ARRAY_BUFFER, (NUM_OF_H_POINTS + NUM_OF_V_POINTS) * sizeof(vec2), sizeof(points), points);
+    singleton->current_tetromino.write_buffer();
     
     glutPostRedisplay();
 }

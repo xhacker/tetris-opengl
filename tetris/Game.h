@@ -10,11 +10,13 @@
 #define __tetris__game__
 
 #include <iostream>
+#include "Tetromino.h"
 
 class Game {
     
 private:
     clock_t start_time;
+    Tetromino current_tetromino;
     
     inline double elapsed() const
     {
