@@ -2,7 +2,12 @@
 
 #include "include/Angel.h"
 
-const int NumPoints = 4;
+const int NUM_OF_H_BLOCKS = 20;
+const int NUM_OF_H_LINES = NUM_OF_H_BLOCKS + 1;
+const int NUM_OF_V_BLOCKS = 10;
+const int NUM_OF_V_LINES = NUM_OF_V_BLOCKS + 1;
+const float H = 0.9;
+const float W = 0.82;
 
 //----------------------------------------------------------------------------
 
@@ -12,20 +17,21 @@ void init()
     glGenVertexArrays(1, &VertexArrayID);
     glBindVertexArray(VertexArrayID);
     
-    // Specify the vertices for a square
-    float ext = 0.5;
-    vec3 points[] = {
-        vec3(-ext, -ext, 0.0), //v1
-        vec3( ext, -ext, 0.0), //v2
-        vec3( ext,  ext, 0.0), //v3
-        vec3(-ext,  ext, 0.0)  //v4
-    };
+    vec4 line_points[NUM_OF_H_LINES + NUM_OF_V_LINES];
+    for (int i = 0; i < NUM_OF_H_LINES; ++i) {
+        line_points[i] = vec4(-W, -H + H / 10 * i,
+                                 W, -H + H / 10 * i);
+    }
+    for (int i = 0; i < NUM_OF_V_LINES; ++i) {
+        line_points[NUM_OF_H_LINES + i] = vec4(-W + W / 5 * i, -H,
+                                               -W + W / 5 * i,  H);
+    }
     
     // Create and initialize a buffer object
-    GLuint buffer;
-    glGenBuffers(1, &buffer);
-    glBindBuffer(GL_ARRAY_BUFFER, buffer);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(points), points, GL_STATIC_DRAW);
+    GLuint vbo;
+    glGenBuffers(1, &vbo);
+    glBindBuffer(GL_ARRAY_BUFFER, vbo);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(line_points), line_points, GL_STATIC_DRAW);
     
     // Load shaders and use the resulting shader program
     GLuint program = InitShader("vshader.glsl", "fshader.glsl");
@@ -33,8 +39,7 @@ void init()
     // Initialize the vertex position attribute from the vertex shader
     GLuint loc = glGetAttribLocation(program, "vPosition");
     glEnableVertexAttribArray(loc);
-    glVertexAttribPointer(loc, 3, GL_FLOAT, GL_FALSE, 0,
-                          BUFFER_OFFSET(0));
+    glVertexAttribPointer(loc, 2, GL_FLOAT, GL_FALSE, 0, 0);
     
     glClearColor(1.0, 1.0, 1.0, 1.0); // white background
 }
@@ -50,8 +55,7 @@ void display()
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     glEnable(GL_CULL_FACE);
     
-    // Draw the points as triangle strip
-    glDrawArrays(GL_TRIANGLE_STRIP, 0, NumPoints);
+    glDrawArrays(GL_LINES, 0, NUM_OF_H_LINES * 2 + NUM_OF_V_LINES * 2);
     
     // Force OpenGL to render
     glFlush();
@@ -72,25 +76,18 @@ void keyboard(unsigned char key, int x, int y)
 
 int main(int argc, char **argv)
 {
-    // Initialize glut library
     glutInit(&argc, argv);
-    
-    // Create the window
     glutInitDisplayMode(GLUT_3_2_CORE_PROFILE | GLUT_RGBA);
-    glutInitWindowSize(512, 512);
-    glutCreateWindow("Hello, Square!");
+    glutInitWindowSize(340, 600);
+    glutCreateWindow("Xetris!");
     
-    // Initialize glew library
     // glewInit();
     
-    // Your own initialization
     init();
     
-    // Set callback functions
     glutDisplayFunc(display);
     glutKeyboardFunc(keyboard);
     
-    // Start the main loop
     glutMainLoop();
     
     return 0;
