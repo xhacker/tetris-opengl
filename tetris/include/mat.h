@@ -125,13 +125,13 @@ class mat2 {
     }
     
     mat2& operator /= ( const GLfloat s ) {
-#ifdef DEBUG
-	if ( std::fabs(s) < DivideByZeroTolerance ) {
-	    std::cerr << "[" << __FILE__ << ":" << __LINE__ << "] "
-		      << "Division by zero" << std::endl;
-	    return mat2();
-	}
-#endif // DEBUG
+//#ifdef DEBUG
+//	if ( std::fabs(s) < DivideByZeroTolerance ) {
+//	    std::cerr << "[" << __FILE__ << ":" << __LINE__ << "] "
+//		      << "Division by zero" << std::endl;
+//	    return mat2();
+//	}
+//#endif // DEBUG
 
 	GLfloat r = GLfloat(1.0) / s;
 	return *this *= r;
@@ -305,13 +305,13 @@ class mat3 {
     }
 
     mat3& operator /= ( const GLfloat s ) {
-#ifdef DEBUG
-	if ( std::fabs(s) < DivideByZeroTolerance ) {
-	    std::cerr << "[" << __FILE__ << ":" << __LINE__ << "] "
-		      << "Division by zero" << std::endl;
-	    return mat3();
-	}
-#endif // DEBUG
+//#ifdef DEBUG
+//	if ( std::fabs(s) < DivideByZeroTolerance ) {
+//	    std::cerr << "[" << __FILE__ << ":" << __LINE__ << "] "
+//		      << "Division by zero" << std::endl;
+//	    return mat3();
+//	}
+//#endif // DEBUG
 
 	GLfloat r = GLfloat(1.0) / s;
 	return *this *= r;
@@ -495,13 +495,13 @@ class mat4 {
     }
 
     mat4& operator /= ( const GLfloat s ) {
-#ifdef DEBUG
-	if ( std::fabs(s) < DivideByZeroTolerance ) {
-	    std::cerr << "[" << __FILE__ << ":" << __LINE__ << "] "
-		      << "Division by zero" << std::endl;
-	    return mat4();
-	}
-#endif // DEBUG
+//#ifdef DEBUG
+//	if ( std::fabs(s) < DivideByZeroTolerance ) {
+//	    std::cerr << "[" << __FILE__ << ":" << __LINE__ << "] "
+//		      << "Division by zero" << std::endl;
+//	    return mat4();
+//	}
+//#endif // DEBUG
 
 	GLfloat r = GLfloat(1.0) / s;
 	return *this *= r;

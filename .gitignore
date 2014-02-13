@@ -12,5 +12,5 @@
 *.la
 *.a
 
-depend
-tetris
+tetris/depend
+tetris/tetris

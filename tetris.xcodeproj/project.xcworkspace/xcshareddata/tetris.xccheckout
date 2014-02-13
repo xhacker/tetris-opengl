@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>086C0AA2-3136-455F-8354-34D2253F79D5</string>
+	<key>IDESourceControlProjectName</key>
+	<string>tetris</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>AC215FD2-8DFB-4D56-A10F-474B9E8DB18B</key>
+		<string>ssh://github.com/xhacker/tetris-opengl.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>tetris.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>AC215FD2-8DFB-4D56-A10F-474B9E8DB18B</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/xhacker/tetris-opengl.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>AC215FD2-8DFB-4D56-A10F-474B9E8DB18B</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>AC215FD2-8DFB-4D56-A10F-474B9E8DB18B</string>
+			<key>IDESourceControlWCCName</key>
+			<string>tetris-opengl</string>
+		</dict>
+	</array>
+</dict>
+</plist>
