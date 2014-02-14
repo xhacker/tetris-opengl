@@ -144,7 +144,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0500;
-				ORGANIZATIONNAME = rui;
+				ORGANIZATIONNAME = Xhacker;
 			};
 			buildConfigurationList = B33EA57618A4B17200B98E94 /* Build configuration list for PBXProject "tetris" */;
 			compatibilityVersion = "Xcode 3.2";

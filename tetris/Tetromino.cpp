@@ -3,7 +3,7 @@
 //  tetris
 //
 //  Created by Xhacker Liu on 2/13/14.
-//  Copyright (c) 2014 rui. All rights reserved.
+//  Copyright (c) 2014 Xhacker. All rights reserved.
 //
 
 #include "Tetromino.h"
