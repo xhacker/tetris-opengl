@@ -10,7 +10,8 @@
 #define __tetris__Tetromino__
 
 #include <iostream>
-#include <sys/time.h>
+
+enum Shape {O, I, S, Z, L, J, T, NUM_OF_SHAPES};
 
 class Tetromino {
     
@@ -18,6 +19,7 @@ private:
     timeval start_time;
     int x;
     int step_extra;
+    Shape shape;
     
     inline double elapsed() const;
 

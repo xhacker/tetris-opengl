@@ -9,12 +9,17 @@
 #include "Game.h"
 #include "constants.h"
 #include "include/Angel.h"
+#include <sys/time.h>
 
 Game *Game::singleton = NULL;
 
 void Game::run(int argc, char **argv)
 {
     singleton = this;
+    
+    timeval t;
+    gettimeofday(&t, NULL);
+    srand((unsigned)(t.tv_sec * 1000 + t.tv_usec));
     
     tetromino.reset();
     tetromino.interval = 1000;
@@ -79,7 +84,7 @@ void Game::display()
     
     // TODO: Draw bottom blocks
     
-    // TODO: Draw current tetromino
+    // Draw current tetromino
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
     glDrawArrays(GL_TRIANGLE_STRIP, NUM_OF_H_POINTS + NUM_OF_V_POINTS, singleton->tetromino.num_of_points());
     
