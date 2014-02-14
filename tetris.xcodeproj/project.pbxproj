@@ -99,12 +99,12 @@
 			children = (
 				B33EA58718A4B1B400B98E94 /* Tetris.cpp */,
 				1A57066318ACDC310077FFD7 /* constants.h */,
-				1A57065D18ACBA4E0077FFD7 /* Game.cpp */,
 				1A57065E18ACBA4E0077FFD7 /* Game.h */,
-				1A57066018ACDA460077FFD7 /* Tetromino.cpp */,
+				1A57065D18ACBA4E0077FFD7 /* Game.cpp */,
 				1A57066118ACDA460077FFD7 /* Tetromino.h */,
-				1A57066418AE12500077FFD7 /* Board.cpp */,
+				1A57066018ACDA460077FFD7 /* Tetromino.cpp */,
 				1A57066518AE12500077FFD7 /* Board.h */,
+				1A57066418AE12500077FFD7 /* Board.cpp */,
 				B33EA58818A4B1B400B98E94 /* include */,
 			);
 			path = tetris;

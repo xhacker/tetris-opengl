@@ -10,9 +10,13 @@
 #define __tetris__Board__
 
 class Board {
+private:
+    bool blocks[20][10] = {{0}};
     
 public:
     int num_of_points();
+    bool has_collision(bool tetro_blocks[4][4], int steps, int x);
+    void add_blocks(bool tetro_blocks[4][4], int steps, int x);
 };
 
 #endif /* defined(__tetris__Board__) */

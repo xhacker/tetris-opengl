@@ -21,8 +21,9 @@ void Game::run(int argc, char **argv)
     gettimeofday(&t, NULL);
     srand((unsigned)(t.tv_sec * 1000 + t.tv_usec));
     
-    tetromino.reset();
     tetromino.interval = 1000;
+    tetromino.board = &board;
+    tetromino.reset();
     
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_3_2_CORE_PROFILE | GLUT_RGBA | GLUT_DOUBLE);

@@ -10,6 +10,7 @@
 #define __tetris__Tetromino__
 
 #include <iostream>
+#include "Board.h"
 
 enum Shape {O, I, S, Z, L, J, T, NUM_OF_SHAPES};
 
@@ -17,16 +18,18 @@ class Tetromino {
     
 private:
     timeval start_time;
-    int x;
+    int cur_x;
     int step_extra;
     int rotation_count;
     Shape shape;
     bool blocks[4][4];
     
     inline double elapsed() const;
+    int _steps();
     void _rotate_ccw();
 
 public:
+    Board *board;
     int interval;
     
     void reset();

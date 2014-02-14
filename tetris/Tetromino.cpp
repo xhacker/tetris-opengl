@@ -62,7 +62,7 @@ inline double Tetromino::elapsed() const
 void Tetromino::reset()
 {
     rotation_count = 0;
-    x = 0;
+    cur_x = 3; // shape outer bound is 4x4
     step_extra = 0;
     shape = (Shape)(rand() % NUM_OF_SHAPES);
     memcpy(blocks, shapes[shape * 4], 4 * 4);
@@ -72,12 +72,16 @@ void Tetromino::reset()
 
 void Tetromino::left()
 {
-    x -= 1;
+    if (!board->has_collision(blocks, _steps(), cur_x - 1)) {
+        cur_x -= 1;
+    }
 }
 
 void Tetromino::right()
 {
-    x += 1;
+    if (!board->has_collision(blocks, _steps(), cur_x + 1)) {
+        cur_x += 1;
+    }
 }
 
 void Tetromino::rotate()
@@ -118,17 +122,28 @@ void Tetromino::_rotate_ccw()
 
 void Tetromino::up()
 {
-    step_extra -= 2;
+    step_extra -= 1;
 }
 
 void Tetromino::down()
 {
-    step_extra += 2;
+    step_extra += 1;
+}
+
+int Tetromino::_steps()
+{
+    return elapsed() / interval + step_extra;
 }
 
 void Tetromino::write_buffer()
 {
-    int steps = elapsed() / interval + step_extra;
+    int steps = _steps();
+    
+    if (board->has_collision(blocks, steps, cur_x)) {
+        board->add_blocks(blocks, steps - 1, cur_x);
+        reset();
+        return;
+    }
     
     // write buffer for each block in shape
     int current = 0;
@@ -136,10 +151,10 @@ void Tetromino::write_buffer()
         for (int j = 0; j < 4; ++j) {
             if (blocks[i][j]) {
                 vec2 points[4];
-                points[0] = vec2((1 - j + x) * BLOCK_W, H - (2 - i) * BLOCK_H - steps * BLOCK_H);
-                points[1] = vec2((2 - j + x) * BLOCK_W, H - (2 - i) * BLOCK_H - steps * BLOCK_H);
-                points[2] = vec2((1 - j + x) * BLOCK_W, H - (1 - i) * BLOCK_H - steps * BLOCK_H);
-                points[3] = vec2((2 - j + x) * BLOCK_W, H - (1 - i) * BLOCK_H - steps * BLOCK_H);
+                points[0] = vec2(-W + (j + cur_x    ) * BLOCK_W, H - (2 - i) * BLOCK_H - steps * BLOCK_H);
+                points[1] = vec2(-W + (j + cur_x + 1) * BLOCK_W, H - (2 - i) * BLOCK_H - steps * BLOCK_H);
+                points[2] = vec2(-W + (j + cur_x    ) * BLOCK_W, H - (1 - i) * BLOCK_H - steps * BLOCK_H);
+                points[3] = vec2(-W + (j + cur_x + 1) * BLOCK_W, H - (1 - i) * BLOCK_H - steps * BLOCK_H);
                 glBufferSubData(GL_ARRAY_BUFFER, (kBeginTetrominoPoints + 4 * current) * sizeof(vec2), sizeof(points), points);
                 
                 current += 1;
