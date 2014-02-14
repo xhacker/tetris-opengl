@@ -9,6 +9,8 @@
 #ifndef tetris_constants_h
 #define tetris_constants_h
 
+const int KEY_ESC = 33;
+
 const int NUM_OF_H_BLOCKS = 20;
 const int NUM_OF_H_LINES = NUM_OF_H_BLOCKS + 1;
 const int NUM_OF_H_POINTS = NUM_OF_H_LINES * 2;

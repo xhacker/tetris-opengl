@@ -16,21 +16,21 @@ class Tetromino {
     
 private:
     timeval start_time;
+    int x;
+    int step_extra;
     
-    inline double elapsed() const
-    {
-        timeval t;
-        gettimeofday(&t, NULL);
-        double elapsedTime;
-        elapsedTime = (t.tv_sec - start_time.tv_sec) * 1000.0;      // sec to ms
-        elapsedTime += (t.tv_usec - start_time.tv_usec) / 1000.0;   // us to ms
-        return elapsedTime;
-    }
+    inline double elapsed() const;
 
 public:
     int interval;
     
     void reset();
+    
+    void left();
+    void right();
+    void rotate();
+    void down();
+    
     void write_buffer();
     int num_of_points();
 };

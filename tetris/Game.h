@@ -16,7 +16,7 @@ class Game {
     
 private:
     clock_t start_time;
-    Tetromino current_tetromino;
+    Tetromino tetromino;
     
     inline double elapsed() const
     {
@@ -26,7 +26,7 @@ private:
 protected:
     void init();
     static void display();
-    static void keyboard(unsigned char key, int x, int y);
+    static void keyboard(int key, int x, int y);
     static void idle();
     
 public:

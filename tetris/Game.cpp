@@ -16,8 +16,8 @@ void Game::run(int argc, char **argv)
 {
     singleton = this;
     
-    current_tetromino.reset();
-    current_tetromino.interval = 1000;
+    tetromino.reset();
+    tetromino.interval = 1000;
     
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_3_2_CORE_PROFILE | GLUT_RGBA | GLUT_DOUBLE);
@@ -29,7 +29,7 @@ void Game::run(int argc, char **argv)
     init();
     
     glutDisplayFunc(display);
-    glutKeyboardFunc(keyboard);
+    glutSpecialFunc(keyboard);
     glutIdleFunc(idle);
     
     glutMainLoop();
@@ -81,23 +81,35 @@ void Game::display()
     
     // TODO: Draw current tetromino
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-    glDrawArrays(GL_TRIANGLE_STRIP, NUM_OF_H_POINTS + NUM_OF_V_POINTS, singleton->current_tetromino.num_of_points());
+    glDrawArrays(GL_TRIANGLE_STRIP, NUM_OF_H_POINTS + NUM_OF_V_POINTS, singleton->tetromino.num_of_points());
     
     glutSwapBuffers();
 }
 
-void Game::keyboard(unsigned char key, int x, int y)
+void Game::keyboard(int key, int x, int y)
 {
     switch (key) {
-        case 033: //ESC
+        case KEY_ESC:
             exit(EXIT_SUCCESS);
+            break;
+        case GLUT_KEY_LEFT:
+            singleton->tetromino.left();
+            break;
+        case GLUT_KEY_RIGHT:
+            singleton->tetromino.right();
+            break;
+        case GLUT_KEY_UP:
+            singleton->tetromino.rotate();
+            break;
+        case GLUT_KEY_DOWN:
+            singleton->tetromino.down();
             break;
     }
 }
 
 void Game::idle()
 {
-    singleton->current_tetromino.write_buffer();
+    singleton->tetromino.write_buffer();
     
     glutPostRedisplay();
 }
