@@ -15,8 +15,8 @@ private:
     
 public:
     int num_of_points();
-    bool has_collision(bool tetro_blocks[4][4], int steps, int x);
-    void add_blocks(bool tetro_blocks[4][4], int steps, int x);
+    bool has_collision(bool tetro_blocks[4][4], int steps, int cur_x);
+    void add_blocks(bool tetro_blocks[4][4], int steps, int cur_x);
 };
 
 #endif /* defined(__tetris__Board__) */

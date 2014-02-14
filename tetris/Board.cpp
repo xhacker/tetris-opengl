@@ -7,10 +7,13 @@
 //
 
 #include "Board.h"
+#include <iostream>
+
+using namespace std;
 
 const int INFINITY = 0x7fffffff;
 
-bool Board::has_collision(bool tetro_blocks[4][4], int steps, int x)
+bool Board::has_collision(bool tetro_blocks[4][4], int steps, int cur_x)
 {
     int left_most = INFINITY;
     int right_most = -INFINITY;
@@ -31,16 +34,18 @@ bool Board::has_collision(bool tetro_blocks[4][4], int steps, int x)
         }
     }
     
+    cout << bottom_most << endl;
+    
     // Check side border, left_most and right_most are between 0~3
-    if (x + left_most < 0) {
+    if (cur_x + left_most < 0) {
         return true;
     }
-    if (x + right_most > 9) {
+    if (cur_x + right_most > 9) {
         return true;
     }
     
     // TODO: Check bottom border
-    if (steps >= 20) {
+    if (steps + bottom_most >= 20) {
         return true;
     }
     
@@ -49,7 +54,7 @@ bool Board::has_collision(bool tetro_blocks[4][4], int steps, int x)
     return false;
 }
 
-void Board::add_blocks(bool tetro_blocks[4][4], int steps, int x)
+void Board::add_blocks(bool tetro_blocks[4][4], int steps, int cur_x)
 {
     ;
 }
