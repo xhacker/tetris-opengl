@@ -109,6 +109,9 @@ void Game::keyboard(int key, int x, int y)
         case GLUT_KEY_DOWN:
             singleton->tetromino.down();
             break;
+        case 'w': case 'W':
+            singleton->tetromino.up();
+            break;
     }
 }
 

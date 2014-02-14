@@ -18,11 +18,6 @@ private:
     clock_t start_time;
     Tetromino tetromino;
     
-    inline double elapsed() const
-    {
-        return (1000.0 * (clock() - start_time) / CLOCKS_PER_SEC);
-    }
-    
 protected:
     void init();
     static void display();

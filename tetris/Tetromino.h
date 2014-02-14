@@ -19,9 +19,12 @@ private:
     timeval start_time;
     int x;
     int step_extra;
+    int rotation_count;
     Shape shape;
+    bool blocks[4][4];
     
     inline double elapsed() const;
+    void _rotate_ccw();
 
 public:
     int interval;
@@ -31,6 +34,7 @@ public:
     void left();
     void right();
     void rotate();
+    void up();
     void down();
     
     void write_buffer();
