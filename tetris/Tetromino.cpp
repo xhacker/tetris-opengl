@@ -140,15 +140,10 @@ void Tetromino::write_buffer()
                 points[1] = vec2((2 - j + x) * BLOCK_W, H - (2 - i) * BLOCK_H - steps * BLOCK_H);
                 points[2] = vec2((1 - j + x) * BLOCK_W, H - (1 - i) * BLOCK_H - steps * BLOCK_H);
                 points[3] = vec2((2 - j + x) * BLOCK_W, H - (1 - i) * BLOCK_H - steps * BLOCK_H);
-                glBufferSubData(GL_ARRAY_BUFFER, (NUM_OF_H_POINTS + NUM_OF_V_POINTS + 4 * current) * sizeof(vec2), sizeof(points), points);
+                glBufferSubData(GL_ARRAY_BUFFER, (kBeginTetrominoPoints + 4 * current) * sizeof(vec2), sizeof(points), points);
                 
                 current += 1;
             }
         }
     }
-}
-
-int Tetromino::num_of_points()
-{
-    return 4 * 4;
 }

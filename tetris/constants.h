@@ -9,15 +9,23 @@
 #ifndef tetris_constants_h
 #define tetris_constants_h
 
-const int KEY_ESC = 33;
+const int kKeyCodeESC = 33;
 
-const int NUM_OF_H_BLOCKS = 20;
-const int NUM_OF_H_LINES = NUM_OF_H_BLOCKS + 1;
-const int NUM_OF_H_POINTS = NUM_OF_H_LINES * 2;
-const int NUM_OF_V_BLOCKS = 10;
-const int NUM_OF_V_LINES = NUM_OF_V_BLOCKS + 1;
-const int NUM_OF_V_POINTS = NUM_OF_V_LINES * 2;
-const int NUM_OF_MISC_POINTS = 200;
+const int kNumOfHBlocks = 20;
+const int kNumOfHLines = kNumOfHBlocks + 1;
+const int kNumOfVBlocks = 10;
+const int kNumOfVLines = kNumOfVBlocks + 1;
+
+const int kNumOfHPoints = kNumOfHLines * 2;
+const int kNumOfVPoints = kNumOfVLines * 2;
+
+const int kBeginTetrominoPoints = kNumOfHPoints + kNumOfVPoints;
+const int kNumOfTetrominoPoints = 16;
+
+const int kBeginBoardPoints = kBeginTetrominoPoints + kNumOfTetrominoPoints;
+const int kMaxBoardPoints = 800;
+
+const int kTotalPoints = kNumOfHPoints + kNumOfVPoints + kNumOfTetrominoPoints + kMaxBoardPoints;
 
 const float H = 0.9;
 const float W = 0.82;

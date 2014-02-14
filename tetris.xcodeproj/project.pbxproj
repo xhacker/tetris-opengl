@@ -10,6 +10,7 @@
 		1A57065C18ACA3770077FFD7 /* InitShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A57065918ACA3770077FFD7 /* InitShader.cpp */; };
 		1A57065F18ACBA4E0077FFD7 /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A57065D18ACBA4E0077FFD7 /* Game.cpp */; };
 		1A57066218ACDA460077FFD7 /* Tetromino.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A57066018ACDA460077FFD7 /* Tetromino.cpp */; };
+		1A57066618AE12500077FFD7 /* Board.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A57066418AE12500077FFD7 /* Board.cpp */; };
 		B33EA58E18A4B1B400B98E94 /* Tetris.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B33EA58718A4B1B400B98E94 /* Tetris.cpp */; };
 		B33EA59118A4B21F00B98E94 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B33EA59018A4B21F00B98E94 /* OpenGL.framework */; };
 		B33EA59318A4B22400B98E94 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B33EA59218A4B22400B98E94 /* GLUT.framework */; };
@@ -50,6 +51,8 @@
 		1A57066018ACDA460077FFD7 /* Tetromino.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Tetromino.cpp; sourceTree = "<group>"; };
 		1A57066118ACDA460077FFD7 /* Tetromino.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tetromino.h; sourceTree = "<group>"; };
 		1A57066318ACDC310077FFD7 /* constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
+		1A57066418AE12500077FFD7 /* Board.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Board.cpp; sourceTree = "<group>"; };
+		1A57066518AE12500077FFD7 /* Board.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Board.h; sourceTree = "<group>"; };
 		B33EA57B18A4B17200B98E94 /* tetris */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = tetris; sourceTree = BUILT_PRODUCTS_DIR; };
 		B33EA58718A4B1B400B98E94 /* Tetris.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Tetris.cpp; sourceTree = "<group>"; };
 		B33EA59018A4B21F00B98E94 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -100,6 +103,8 @@
 				1A57065E18ACBA4E0077FFD7 /* Game.h */,
 				1A57066018ACDA460077FFD7 /* Tetromino.cpp */,
 				1A57066118ACDA460077FFD7 /* Tetromino.h */,
+				1A57066418AE12500077FFD7 /* Board.cpp */,
+				1A57066518AE12500077FFD7 /* Board.h */,
 				B33EA58818A4B1B400B98E94 /* include */,
 			);
 			path = tetris;
@@ -171,6 +176,7 @@
 				1A57065C18ACA3770077FFD7 /* InitShader.cpp in Sources */,
 				B33EA58E18A4B1B400B98E94 /* Tetris.cpp in Sources */,
 				1A57065F18ACBA4E0077FFD7 /* Game.cpp in Sources */,
+				1A57066618AE12500077FFD7 /* Board.cpp in Sources */,
 				1A57066218ACDA460077FFD7 /* Tetromino.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

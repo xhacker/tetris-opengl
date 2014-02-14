@@ -48,14 +48,14 @@ void Game::init()
     glGenVertexArrays(1, &VertexArrayID);
     glBindVertexArray(VertexArrayID);
     
-    vec2 points[NUM_OF_H_POINTS + NUM_OF_V_POINTS + NUM_OF_MISC_POINTS];
-    for (int i = 0; i < NUM_OF_H_LINES; ++i) {
+    vec2 points[kTotalPoints];
+    for (int i = 0; i < kNumOfHLines; ++i) {
         points[i * 2    ] = vec2(-W, -H + BLOCK_H * i);
         points[i * 2 + 1] = vec2( W, -H + BLOCK_H * i);
     }
-    for (int i = 0; i < NUM_OF_V_LINES; ++i) {
-        points[NUM_OF_H_POINTS + i * 2    ] = vec2(-W + BLOCK_W * i, -H);
-        points[NUM_OF_H_POINTS + i * 2 + 1] = vec2(-W + BLOCK_W * i,  H);
+    for (int i = 0; i < kNumOfVLines; ++i) {
+        points[kNumOfHPoints + i * 2    ] = vec2(-W + BLOCK_W * i, -H);
+        points[kNumOfHPoints + i * 2 + 1] = vec2(-W + BLOCK_W * i,  H);
     }
     
     GLuint vbo;
@@ -80,13 +80,15 @@ void Game::display()
     glEnable(GL_CULL_FACE);
     
     // Draw grids
-    glDrawArrays(GL_LINES, 0, NUM_OF_H_POINTS + NUM_OF_V_POINTS);
-    
-    // TODO: Draw bottom blocks
+    glDrawArrays(GL_LINES, 0, kNumOfHPoints + kNumOfVPoints);
     
     // Draw current tetromino
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-    glDrawArrays(GL_TRIANGLE_STRIP, NUM_OF_H_POINTS + NUM_OF_V_POINTS, singleton->tetromino.num_of_points());
+    glDrawArrays(GL_TRIANGLE_STRIP, kBeginTetrominoPoints, kNumOfTetrominoPoints);
+    
+    // Draw bottom blocks
+    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+    glDrawArrays(GL_TRIANGLE_STRIP, kBeginBoardPoints, singleton->board.num_of_points());
     
     glutSwapBuffers();
 }
@@ -94,7 +96,7 @@ void Game::display()
 void Game::keyboard(int key, int x, int y)
 {
     switch (key) {
-        case KEY_ESC:
+        case kKeyCodeESC:
             exit(EXIT_SUCCESS);
             break;
         case GLUT_KEY_LEFT:

@@ -38,7 +38,6 @@ public:
     void down();
     
     void write_buffer();
-    int num_of_points();
 };
 
 

@@ -11,12 +11,14 @@
 
 #include <iostream>
 #include "Tetromino.h"
+#include "Board.h"
 
 class Game {
     
 private:
     clock_t start_time;
     Tetromino tetromino;
+    Board board;
     
 protected:
     void init();
