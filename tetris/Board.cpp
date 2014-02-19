@@ -42,12 +42,19 @@ bool Board::has_collision(bool tetro_blocks[4][4], int steps, int cur_x)
         return true;
     }
     
-    // TODO: Check bottom border
+    // Check bottom border
     if (steps + bottom_most >= 20) {
         return true;
     }
     
-    // TODO: Check collision
+    // Check collision
+    for (int y = 0; y < 4; ++y) {
+        for (int x = 0; x < 4; ++x) {
+            if (tetro_blocks[y][x] && blocks[steps + y][cur_x + x]) {
+                return true;
+            }
+        }
+    }
     
     return false;
 }
