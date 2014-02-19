@@ -60,34 +60,29 @@ void Game::init()
         points[kNumOfHPoints + i * 2 + 1] = vec2(-W + BLOCK_W * i,  H);
     }
 
+    vec4 colors[kTotalPoints];
+    for (int i = 0; i < kNumOfHPoints + kNumOfVPoints; ++i) {
+        colors[i] = vec4(0.8, 0.8, 0.8, 1.0);
+    }
+
+    GLuint vaoID;
+    glGenVertexArrays(1, &vaoID);
+    glBindVertexArray(vaoID);
+
+    GLuint vboID;
+    glGenBuffers(1, &vboID);
+    glBindBuffer(GL_ARRAY_BUFFER, vboID);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(points) + sizeof(colors), points, GL_STATIC_DRAW);
+    glBufferSubData(GL_ARRAY_BUFFER, kTotalPoints * sizeof(vec2), sizeof(colors), colors);
+
     GLuint program = InitShader("vshader.glsl", "fshader.glsl");
-    GLuint loc_point = glGetAttribLocation(program, "vPosition");
-    GLuint loc_color = glGetAttribLocation(program, "in_Color");
+	GLuint vPosition = glGetAttribLocation(program, "vPosition");
+	glEnableVertexAttribArray(vPosition);
+	glVertexAttribPointer(vPosition, 2, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0));
 
-    glGenVertexArrays(2, &vaoID[0]);
-
-    glBindVertexArray(vaoID[0]);
-
-    glGenBuffers(1, &vboID[0]);
-    glBindBuffer(GL_ARRAY_BUFFER, vboID[0]);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(points), points, GL_STATIC_DRAW);
-    glEnableVertexAttribArray(loc_point);
-    glVertexAttribPointer(loc_point, 2, GL_FLOAT, GL_FALSE, 0, 0);
-
-//    vec3 colors[kTotalPoints];
-//    for (int i = 0; i < kTotalPoints; ++i) {
-//        colors[i] = vec3(0.8, 0.8, 0.8);
-//    }
-//
-//    glBindVertexArray(vaoID[1]);
-//
-//    glGenBuffers(1, &vboID[1]);
-//    glBindBuffer(GL_ARRAY_BUFFER, vboID[1]);
-//    glBufferData(GL_ARRAY_BUFFER, sizeof(colors), colors, GL_STATIC_DRAW);
-//    glEnableVertexAttribArray(loc_color);
-//    glVertexAttribPointer(loc_color, 3, GL_FLOAT, GL_FALSE, 0, 0);
-
-//    glBindVertexArray(0);
+    GLuint vColor = glGetAttribLocation(program, "vColor");
+	glEnableVertexAttribArray(vColor);
+	glVertexAttribPointer(vColor, 4, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(sizeof(points)));
 
     glClearColor(1.0, 1.0, 1.0, 1.0);
 }
@@ -95,8 +90,6 @@ void Game::init()
 void Game::display()
 {
     glClear(GL_COLOR_BUFFER_BIT);
-
-//    glBindVertexArray(singleton->vaoID[0]);
 
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     glEnable(GL_CULL_FACE);

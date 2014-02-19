@@ -50,6 +50,16 @@ const bool shapes[28][4] =
     {0, 0, 0, 0},
 };
 
+const int kNumOfColors = 5;
+const vec4 kDefaultColors[kNumOfColors] =
+{
+    vec4(.31, .39, .92, 1.0), // blue
+    vec4(.39, .84, .29, 1.0), // green
+    vec4(.95, .28, .25, 1.0), // red
+    vec4(.55, .36, .90, 1.0), // purple
+    vec4(.97, .57, .22, 1.0), // orange
+};
+
 inline double Tetromino::elapsed() const
 {
     timeval t;
@@ -67,6 +77,8 @@ void Tetromino::reset()
     step_extra = -2;
     shape = (Shape)(rand() % NUM_OF_SHAPES);
     memcpy(blocks, shapes[shape * 4], 4 * 4);
+
+    color_id = rand() % kNumOfColors;
     
     gettimeofday(&start_time, NULL);
 }
@@ -87,6 +99,7 @@ void Tetromino::right()
 
 void Tetromino::rotate()
 {
+#warning check collision
     rotation_count += 1;
     
     if (shape == O) {
@@ -157,7 +170,11 @@ void Tetromino::write_buffer()
                 points[2] = vec2(-W + (j + cur_x    ) * BLOCK_W, H - i * BLOCK_H - steps * BLOCK_H);
                 points[3] = vec2(-W + (j + cur_x + 1) * BLOCK_W, H - i * BLOCK_H - steps * BLOCK_H);
                 glBufferSubData(GL_ARRAY_BUFFER, (kBeginTetrominoPoints + 4 * current) * sizeof(vec2), sizeof(points), points);
-                
+
+                vec4 color = kDefaultColors[color_id];
+                vec4 colors[4] = {color, color, color, color};
+                glBufferSubData(GL_ARRAY_BUFFER, kTotalPoints * sizeof(vec2) + (kBeginTetrominoPoints + 4 * current) * sizeof(vec4), sizeof(colors), colors);
+
                 current += 1;
             }
         }

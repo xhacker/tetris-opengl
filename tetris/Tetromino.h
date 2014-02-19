@@ -23,6 +23,7 @@ private:
     int rotation_count;
     Shape shape;
     bool blocks[4][4];
+    int color_id;
     
     inline double elapsed() const;
     int _steps();

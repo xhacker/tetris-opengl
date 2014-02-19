@@ -20,8 +20,6 @@ private:
     clock_t start_time;
     Tetromino tetromino;
     Board board;
-    GLuint vaoID[2];
-    GLuint vboID[2];
     
 protected:
     void init();
