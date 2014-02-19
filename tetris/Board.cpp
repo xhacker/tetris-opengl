@@ -60,7 +60,7 @@ bool Board::has_collision(bool tetro_blocks[4][4], int steps, int cur_x)
     return false;
 }
 
-void Board::add_blocks(bool tetro_blocks[4][4], int steps, int cur_x)
+void Board::add_blocks(bool tetro_blocks[4][4], int steps, int cur_x, int color_id)
 {
     for (int y = 0; y < 4; ++y) {
         for (int x = 0; x < 4; ++x) {
@@ -68,7 +68,7 @@ void Board::add_blocks(bool tetro_blocks[4][4], int steps, int cur_x)
                 if (!blocks[steps + y][cur_x + x]) {
                     num_of_points += 4;
                 }
-                blocks[steps + y][cur_x + x] = 1;
+                blocks[steps + y][cur_x + x] = -color_id;
             }
         }
     }
@@ -85,9 +85,9 @@ void Board::add_blocks(bool tetro_blocks[4][4], int steps, int cur_x)
 
         if (full) {
             for (int i = y; i > 0; --i) {
-                memcpy(blocks[i], blocks[i - 1], 10 * sizeof(bool));
+                memcpy(blocks[i], blocks[i - 1], 10 * sizeof(int));
             }
-            memset(blocks[0], 0, 10 * sizeof(bool));
+            memset(blocks[0], 0, 10 * sizeof(int));
             num_of_points -= 4 * 10;
         }
     }
@@ -105,6 +105,10 @@ void Board::write_buffer()
                 points[2] = vec2(-W + (j    ) * BLOCK_W, H - i * BLOCK_H);
                 points[3] = vec2(-W + (j + 1) * BLOCK_W, H - i * BLOCK_H);
                 glBufferSubData(GL_ARRAY_BUFFER, (kBeginBoardPoints + 4 * current) * sizeof(vec2), sizeof(points), points);
+
+                vec4 color = kDefaultColors[-blocks[i][j]];
+                vec4 colors[4] = {color, color, color, color};
+                glBufferSubData(GL_ARRAY_BUFFER, kTotalPoints * sizeof(vec2) + (kBeginBoardPoints + 4 * current) * sizeof(vec4), sizeof(colors), colors);
 
                 current += 1;
             }

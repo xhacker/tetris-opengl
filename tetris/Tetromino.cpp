@@ -50,16 +50,6 @@ const bool shapes[28][4] =
     {0, 0, 0, 0},
 };
 
-const int kNumOfColors = 5;
-const vec4 kDefaultColors[kNumOfColors] =
-{
-    vec4(.31, .39, .92, 1.0), // blue
-    vec4(.39, .84, .29, 1.0), // green
-    vec4(.95, .28, .25, 1.0), // red
-    vec4(.55, .36, .90, 1.0), // purple
-    vec4(.97, .57, .22, 1.0), // orange
-};
-
 inline double Tetromino::elapsed() const
 {
     timeval t;
@@ -154,7 +144,7 @@ void Tetromino::write_buffer()
     int steps = _steps();
     
     if (board->has_collision(blocks, steps, cur_x)) {
-        board->add_blocks(blocks, steps - 1, cur_x);
+        board->add_blocks(blocks, steps - 1, cur_x, color_id);
         reset();
         return;
     }

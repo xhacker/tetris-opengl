@@ -9,6 +9,8 @@
 #ifndef tetris_constants_h
 #define tetris_constants_h
 
+#include "include/Angel.h"
+
 const int kKeyCodeESC = 33;
 
 const int kNumOfHBlocks = 20;
@@ -31,5 +33,15 @@ const float H = 0.9;
 const float W = 0.82;
 const float BLOCK_H = H / 10;
 const float BLOCK_W = W / 5;
+
+const int kNumOfColors = 5;
+const vec4 kDefaultColors[kNumOfColors] =
+{
+    vec4(.37, .62, .95, 1.0), // blue
+    vec4(.39, .84, .29, 1.0), // green
+    vec4(.95, .28, .25, 1.0), // red
+    vec4(.55, .36, .90, 1.0), // purple
+    vec4(.97, .57, .22, 1.0), // orange
+};
 
 #endif
