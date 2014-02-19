@@ -17,7 +17,7 @@ INCLUDEDIR=/usr/include/
 LIBDIR=/usr/lib
 
 # If you have more source files add them here
-SOURCE= tetris.cpp include/InitShader.cpp
+SOURCE= Tetris.cpp Game.cpp Board.cpp Tetromino.cpp include/InitShader.cpp
 
 # The compiler we are using
 CC= g++
@@ -34,10 +34,10 @@ EXECUTABLE= tetris
 # to your program here
 
 # Linux (default)
-# LDFLAGS = -lGL -lglut -lGLEW -lXext -lX11 -lm
+LDFLAGS = -lGL -lglut -lGLEW -lXext -lX11 -lm
 
 # OS X
-LDFLAGS = -framework OpenGL -framework GLUT
+# LDFLAGS = -framework OpenGL -framework GLUT
 
 # If you have other library files in a different directory add them here
 INCLUDEFLAG= -I. -I$(INCLUDEDIR) -Iinclude/
@@ -51,6 +51,8 @@ all: $(OBJECT) depend
 	$(CC) $(CFLAGS) $(INCLUDEFLAG) $(LIBFLAG) $(OBJECT) -o $(EXECUTABLE) $(LDFLAGS)
 
 tetris: all
+
+rebuild: clean all
 
 depend:
 	$(CC) -M $(SOURCE) > depend

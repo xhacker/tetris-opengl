@@ -10,6 +10,7 @@
 #include "constants.h"
 #include "include/Angel.h"
 #include <sys/time.h>
+#include <cstring>
 
 const bool shapes[28][4] =
 {

@@ -10,6 +10,7 @@
 #include "constants.h"
 #include "include/Angel.h"
 #include <iostream>
+#include <cstring>
 
 using namespace std;
 
