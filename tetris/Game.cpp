@@ -21,6 +21,7 @@ void Game::run(int argc, char **argv)
     srand((unsigned)(t.tv_sec * 1000 + t.tv_usec));
     
     tetromino.interval = 800;
+    tetromino.game = singleton;
     tetromino.board = &board;
     tetromino.reset();
     
@@ -134,8 +135,15 @@ void Game::keyboard(int key, int x, int y)
 
 void Game::idle()
 {
-    singleton->tetromino.write_buffer();
-    singleton->board.write_buffer();
-    
-    glutPostRedisplay();
+    if (!singleton->is_game_over) {
+        singleton->tetromino.write_buffer();
+        singleton->board.write_buffer();
+
+        glutPostRedisplay();
+    }
+}
+
+void Game::game_over()
+{
+    is_game_over = true;
 }

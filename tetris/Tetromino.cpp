@@ -7,6 +7,7 @@
 //
 
 #include "Tetromino.h"
+#include "Game.h"
 #include "constants.h"
 #include "include/Angel.h"
 #include <sys/time.h>
@@ -191,7 +192,7 @@ void Tetromino::write_buffer()
     
     if (board->has_collision(blocks, steps, cur_x)) {
         if (steps <= -2) {
-            // game over
+            game->game_over();
             return;
         }
         else {

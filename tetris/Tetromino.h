@@ -14,6 +14,8 @@
 
 enum Shape {O, I, S, Z, L, J, T, NUM_OF_SHAPES};
 
+class Game;
+
 class Tetromino {
     
 private:
@@ -32,6 +34,7 @@ private:
     void _add_blocks();
 
 public:
+    Game *game;
     Board *board;
     int interval;
     

@@ -14,10 +14,13 @@
 #include "Tetromino.h"
 #include "Board.h"
 
+class Tetromino;
+
 class Game {
     
 private:
     clock_t start_time;
+    bool is_game_over;
     Tetromino tetromino;
     Board board;
     
@@ -29,6 +32,7 @@ protected:
     
 public:
     static Game *singleton;
+    void game_over();
     void run(int argc, char **argv);
 };
 
