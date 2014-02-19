@@ -84,7 +84,9 @@ void Board::add_blocks(bool tetro_blocks[4][4], int steps, int cur_x)
         }
 
         if (full) {
-            memcpy(blocks[1], blocks[0], y * 10 * sizeof(bool));
+            for (int i = y; i > 0; --i) {
+                memcpy(blocks[i], blocks[i - 1], 10 * sizeof(bool));
+            }
             memset(blocks[0], 0, 10 * sizeof(bool));
             num_of_points -= 4 * 10;
         }
