@@ -29,6 +29,7 @@ private:
     int _steps();
     void _rotate_ccw();
     void _rotate_back();
+    void _add_blocks();
 
 public:
     Board *board;

@@ -166,9 +166,18 @@ void Tetromino::down()
 {
     step_extra += 1;
     if (board->has_collision(blocks, _steps(), cur_x)) {
-        board->add_blocks(blocks, _steps() - 1, cur_x, color_id);
-        reset();
+        _add_blocks();
     }
+}
+
+void Tetromino::_add_blocks()
+{
+    int rollback = 1;
+    while (board->has_collision(blocks, _steps() - rollback, cur_x)) {
+        rollback += 1;
+    }
+    board->add_blocks(blocks, _steps() - rollback, cur_x, color_id);
+    reset();
 }
 
 int Tetromino::_steps()
@@ -181,9 +190,14 @@ void Tetromino::write_buffer()
     int steps = _steps();
     
     if (board->has_collision(blocks, steps, cur_x)) {
-        board->add_blocks(blocks, steps - 1, cur_x, color_id);
-        reset();
-        return;
+        if (steps <= -2) {
+            // game over
+            return;
+        }
+        else {
+            _add_blocks();
+            return;
+        }
     }
     
     // write buffer for each block in shape

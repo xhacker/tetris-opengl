@@ -73,7 +73,7 @@ void Board::add_blocks(bool tetro_blocks[4][4], int steps, int cur_x, int color_
 {
     for (int y = 0; y < 4; ++y) {
         for (int x = 0; x < 4; ++x) {
-            if (tetro_blocks[y][x] && steps + y < 20 && cur_x + x < 10) {
+            if (tetro_blocks[y][x] && steps + y < 20 && cur_x + x < 10 && steps + y >= 0) {
                 if (blocks[steps + y][cur_x + x] == kBlockEmpty) {
                     num_of_points += 4;
                 }
