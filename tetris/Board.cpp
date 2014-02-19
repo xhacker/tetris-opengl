@@ -7,11 +7,11 @@
 //
 
 #include "Board.h"
+#include "constants.h"
+#include "include/Angel.h"
 #include <iostream>
 
 using namespace std;
-
-const int INFINITY = 0x7fffffff;
 
 bool Board::has_collision(bool tetro_blocks[4][4], int steps, int cur_x)
 {
@@ -33,9 +33,7 @@ bool Board::has_collision(bool tetro_blocks[4][4], int steps, int cur_x)
             }
         }
     }
-    
-    cout << bottom_most << endl;
-    
+
     // Check side border, left_most and right_most are between 0~3
     if (cur_x + left_most < 0) {
         return true;
@@ -56,10 +54,34 @@ bool Board::has_collision(bool tetro_blocks[4][4], int steps, int cur_x)
 
 void Board::add_blocks(bool tetro_blocks[4][4], int steps, int cur_x)
 {
-    ;
+    for (int y = 0; y < 4; ++y) {
+        for (int x = 0; x < 4; ++x) {
+            if (tetro_blocks[y][x] && steps + y < 20 && cur_x + x < 10) {
+                if (blocks[steps + y][cur_x + x] == 0) {
+                    num_of_points += 4;
+                }
+                blocks[steps + y][cur_x + x] = 1;
+            }
+        }
+    }
 }
 
-int Board::num_of_points()
+void Board::write_buffer()
 {
-    return 0;
+    int current = 0;
+    for (int i = 0; i < 20; ++i) {
+        for (int j = 0; j < 10; ++j) {
+            if (blocks[i][j]) {
+                cout << i << ", " << j << ", " << num_of_points << endl;
+                vec2 points[4];
+                points[0] = vec2(-W + (j    ) * BLOCK_W, H - (i + 1) * BLOCK_H);
+                points[1] = vec2(-W + (j + 1) * BLOCK_W, H - (i + 1) * BLOCK_H);
+                points[2] = vec2(-W + (j    ) * BLOCK_W, H - i * BLOCK_H);
+                points[3] = vec2(-W + (j + 1) * BLOCK_W, H - i * BLOCK_H);
+                glBufferSubData(GL_ARRAY_BUFFER, (kBeginBoardPoints + 4 * current) * sizeof(vec2), sizeof(points), points);
+
+                current += 1;
+            }
+        }
+    }
 }

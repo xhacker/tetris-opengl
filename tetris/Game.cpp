@@ -89,7 +89,7 @@ void Game::display()
     
     // Draw bottom blocks
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-    glDrawArrays(GL_TRIANGLE_STRIP, kBeginBoardPoints, singleton->board.num_of_points());
+    glDrawArrays(GL_TRIANGLE_STRIP, kBeginBoardPoints, singleton->board.num_of_points);
     
     glutSwapBuffers();
 }
@@ -121,6 +121,7 @@ void Game::keyboard(int key, int x, int y)
 void Game::idle()
 {
     singleton->tetromino.write_buffer();
+    singleton->board.write_buffer();
     
     glutPostRedisplay();
 }

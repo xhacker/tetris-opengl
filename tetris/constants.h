@@ -32,4 +32,6 @@ const float W = 0.82;
 const float BLOCK_H = H / 10;
 const float BLOCK_W = W / 5;
 
+const int INFINITY = 0x7fffffff;
+
 #endif
