@@ -12,6 +12,7 @@
 #include "include/Angel.h"
 
 const int kKeyCodeESC = 33;
+const int kKeyCodeESC2 = 27;
 
 const int kNumOfHBlocks = 20;
 const int kNumOfHLines = kNumOfHBlocks + 1;
@@ -45,5 +46,9 @@ const vec4 kDefaultColors[kNumOfColors] =
 };
 
 const int kBlockEmpty = -1;
+
+const double kDefaultInterval = 400;
+const double kIntervalSpeedUp = 1.1;
+const double kMinimumInterval = 100;
 
 #endif

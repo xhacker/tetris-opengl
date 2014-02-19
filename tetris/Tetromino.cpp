@@ -73,8 +73,8 @@ void Tetromino::reset()
     
     gettimeofday(&start_time, NULL);
 
-    if (interval > 100) {
-        interval -= 30;
+    if (interval > kMinimumInterval) {
+        interval /= kIntervalSpeedUp;
     }
 }
 

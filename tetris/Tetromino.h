@@ -36,7 +36,7 @@ private:
 public:
     Game *game;
     Board *board;
-    int interval;
+    double interval;
     
     void reset();
     

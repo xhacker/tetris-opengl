@@ -20,7 +20,7 @@ void Game::run(int argc, char **argv)
     gettimeofday(&t, NULL);
     srand((unsigned)(t.tv_sec * 1000 + t.tv_usec));
     
-    tetromino.interval = 800;
+    tetromino.interval = kDefaultInterval;
     tetromino.game = singleton;
     tetromino.board = &board;
     tetromino.reset();
@@ -112,9 +112,6 @@ void Game::display()
 void Game::keyboard(int key, int x, int y)
 {
     switch (key) {
-        case kKeyCodeESC:
-            exit(EXIT_SUCCESS);
-            break;
         case GLUT_KEY_LEFT:
             singleton->tetromino.left();
             break;
@@ -129,6 +126,10 @@ void Game::keyboard(int key, int x, int y)
             break;
         case 'w': case 'W':
             singleton->tetromino.up();
+            break;
+        case 'q': case 'Q':
+        case kKeyCodeESC: case kKeyCodeESC2:
+            exit(EXIT_SUCCESS);
             break;
     }
 }
