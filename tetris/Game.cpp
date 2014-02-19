@@ -91,6 +91,7 @@ void Game::reset()
     tetromino.interval = kDefaultInterval;
     tetromino.reset();
     board.reset();
+    is_game_over = false;
 }
 
 void Game::display()

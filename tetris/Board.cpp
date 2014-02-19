@@ -50,7 +50,7 @@ bool Board::has_collision(bool tetro_blocks[4][4], int steps, int cur_x)
         }
     }
 
-    // Check side border, left_most and right_most are between 0~3
+    // check side border, left_most and right_most are between 0~3
     if (cur_x + left_most < 0) {
         return true;
     }
@@ -58,15 +58,16 @@ bool Board::has_collision(bool tetro_blocks[4][4], int steps, int cur_x)
         return true;
     }
     
-    // Check bottom border
+    // check bottom border
     if (steps + bottom_most >= 20) {
         return true;
     }
     
-    // Check collision
+    // check collision
     for (int y = 0; y < 4; ++y) {
         for (int x = 0; x < 4; ++x) {
-            if (tetro_blocks[y][x] && (blocks[steps + y][cur_x + x] != kBlockEmpty)) {
+            if (steps + y >= 0 && steps + y < 20 &&
+                tetro_blocks[y][x] && (blocks[steps + y][cur_x + x] != kBlockEmpty)) {
                 return true;
             }
         }
@@ -113,7 +114,7 @@ void Board::add_blocks(bool tetro_blocks[4][4], int steps, int cur_x, int color_
         }
     }
 
-    // Check full row
+    // check full row
     for (int y = 0; y < 20; ++y) {
         bool full = true;
         for (int x = 0; x < 10; ++x) {
