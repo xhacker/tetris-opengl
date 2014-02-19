@@ -28,6 +28,7 @@ private:
     inline double elapsed() const;
     int _steps();
     void _rotate_ccw();
+    void _rotate_back();
 
 public:
     Board *board;

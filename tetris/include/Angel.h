@@ -17,11 +17,7 @@
 #include <cmath>
 #include <iostream>
 #include <cstdio>
-
-//  Define M_PI in the case it's not defined in the math header file
-#ifndef M_PI
-#  define M_PI  3.14159265358979323846
-#endif
+#include <cassert>
 
 //----------------------------------------------------------------------------
 //

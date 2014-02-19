@@ -89,7 +89,6 @@ void Tetromino::right()
 
 void Tetromino::rotate()
 {
-#warning check collision
     rotation_count += 1;
     
     if (shape == O) {
@@ -97,7 +96,7 @@ void Tetromino::rotate()
     }
     else if (shape == I || shape == S || shape == Z) {
         if (rotation_count % 2 == 0) {
-            memcpy(blocks, shapes[shape * 4], 4 * 4);
+            _rotate_back();
         }
         else {
             _rotate_ccw();
@@ -121,7 +120,30 @@ void Tetromino::_rotate_ccw()
             }
         }
     }
-    memcpy(blocks, new_blocks, 4 * 4);
+
+    if (!board->has_collision(new_blocks, _steps(), cur_x)) {
+        memcpy(blocks, new_blocks, 4 * 4);
+    }
+    else {
+        rotation_count -= 1;
+    }
+}
+
+void Tetromino::_rotate_back()
+{
+    bool new_blocks[4][4] = {{0}};
+    for (int y = 0; y < 4; ++y) {
+        for (int x = 0; x < 4; ++x) {
+            new_blocks[y][x] = shapes[shape * 4 + y][x];
+        }
+    }
+
+    if (!board->has_collision(new_blocks, _steps(), cur_x)) {
+        memcpy(blocks, new_blocks, 4 * 4);
+    }
+    else {
+        rotation_count -= 1;
+    }
 }
 
 void Tetromino::up()
