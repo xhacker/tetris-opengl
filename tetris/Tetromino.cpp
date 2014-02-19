@@ -117,6 +117,11 @@ void Tetromino::_rotate_ccw()
                 int new_y = 1 - (x - 2);
                 int new_x = 2 + (y - 1);
                 new_blocks[new_y][new_x] = 1;
+
+                assert(new_y >= 0);
+                assert(new_y < 4);
+                assert(new_x >= 0);
+                assert(new_x < 4);
             }
         }
     }
@@ -135,6 +140,8 @@ void Tetromino::_rotate_back()
     for (int y = 0; y < 4; ++y) {
         for (int x = 0; x < 4; ++x) {
             new_blocks[y][x] = shapes[shape * 4 + y][x];
+
+            assert(shape * 4 + y < 28);
         }
     }
 

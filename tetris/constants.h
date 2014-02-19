@@ -44,4 +44,6 @@ const vec4 kDefaultColors[kNumOfColors] =
     vec4(.97, .57, .22, 1.0), // orange
 };
 
+const int kBlockEmpty = -1;
+
 #endif

@@ -11,9 +11,10 @@
 
 class Board {
 private:
-    int blocks[20][10] = {{0}};
+    int blocks[20][10];
     
 public:
+    Board();
     int num_of_points = 0;
     bool has_collision(bool tetro_blocks[4][4], int steps, int cur_x);
     void add_blocks(bool tetro_blocks[4][4], int steps, int cur_x, int color_id);
