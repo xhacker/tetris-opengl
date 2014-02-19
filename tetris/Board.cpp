@@ -64,11 +64,28 @@ void Board::add_blocks(bool tetro_blocks[4][4], int steps, int cur_x)
     for (int y = 0; y < 4; ++y) {
         for (int x = 0; x < 4; ++x) {
             if (tetro_blocks[y][x] && steps + y < 20 && cur_x + x < 10) {
-                if (blocks[steps + y][cur_x + x] == 0) {
+                if (!blocks[steps + y][cur_x + x]) {
                     num_of_points += 4;
                 }
                 blocks[steps + y][cur_x + x] = 1;
             }
+        }
+    }
+
+    // Check full row
+    for (int y = 0; y < 20; ++y) {
+        bool full = true;
+        for (int x = 0; x < 10; ++x) {
+            if (!blocks[y][x]) {
+                full = false;
+                break;
+            }
+        }
+
+        if (full) {
+            memcpy(blocks[1], blocks[0], y * 10 * sizeof(bool));
+            memset(blocks[0], 0, 10 * sizeof(bool));
+            num_of_points -= 4 * 10;
         }
     }
 }
@@ -79,7 +96,6 @@ void Board::write_buffer()
     for (int i = 0; i < 20; ++i) {
         for (int j = 0; j < 10; ++j) {
             if (blocks[i][j]) {
-                cout << i << ", " << j << ", " << num_of_points << endl;
                 vec2 points[4];
                 points[0] = vec2(-W + (j    ) * BLOCK_W, H - (i + 1) * BLOCK_H);
                 points[1] = vec2(-W + (j + 1) * BLOCK_W, H - (i + 1) * BLOCK_H);
