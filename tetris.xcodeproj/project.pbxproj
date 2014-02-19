@@ -57,8 +57,8 @@
 		B33EA58718A4B1B400B98E94 /* Tetris.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Tetris.cpp; sourceTree = "<group>"; };
 		B33EA59018A4B21F00B98E94 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		B33EA59218A4B22400B98E94 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
-		B33EA59518A4B39200B98E94 /* fshader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; name = fshader.glsl; path = tetris/fshader.glsl; sourceTree = "<group>"; };
-		B33EA59618A4B39200B98E94 /* vshader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; name = vshader.glsl; path = tetris/vshader.glsl; sourceTree = "<group>"; };
+		B33EA59518A4B39200B98E94 /* fshader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = fshader.glsl; sourceTree = "<group>"; };
+		B33EA59618A4B39200B98E94 /* vshader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = vshader.glsl; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,8 +77,6 @@
 		B33EA57218A4B17200B98E94 = {
 			isa = PBXGroup;
 			children = (
-				B33EA59518A4B39200B98E94 /* fshader.glsl */,
-				B33EA59618A4B39200B98E94 /* vshader.glsl */,
 				B33EA59218A4B22400B98E94 /* GLUT.framework */,
 				B33EA59018A4B21F00B98E94 /* OpenGL.framework */,
 				B33EA57D18A4B17200B98E94 /* tetris */,
@@ -105,6 +103,8 @@
 				1A57066018ACDA460077FFD7 /* Tetromino.cpp */,
 				1A57066518AE12500077FFD7 /* Board.h */,
 				1A57066418AE12500077FFD7 /* Board.cpp */,
+				B33EA59618A4B39200B98E94 /* vshader.glsl */,
+				B33EA59518A4B39200B98E94 /* fshader.glsl */,
 				B33EA58818A4B1B400B98E94 /* include */,
 			);
 			path = tetris;

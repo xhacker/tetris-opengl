@@ -10,6 +10,7 @@
 #define __tetris__game__
 
 #include <iostream>
+#include "include/Angel.h"
 #include "Tetromino.h"
 #include "Board.h"
 
@@ -19,6 +20,8 @@ private:
     clock_t start_time;
     Tetromino tetromino;
     Board board;
+    GLuint vaoID[2];
+    GLuint vboID[2];
     
 protected:
     void init();
