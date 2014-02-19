@@ -20,7 +20,7 @@ void Game::run(int argc, char **argv)
     gettimeofday(&t, NULL);
     srand((unsigned)(t.tv_sec * 1000 + t.tv_usec));
     
-    tetromino.interval = 1000;
+    tetromino.interval = 800;
     tetromino.board = &board;
     tetromino.reset();
     

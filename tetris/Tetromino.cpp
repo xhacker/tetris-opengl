@@ -71,6 +71,10 @@ void Tetromino::reset()
     color_id = rand() % kNumOfColors;
     
     gettimeofday(&start_time, NULL);
+
+    if (interval > 100) {
+        interval -= 30;
+    }
 }
 
 void Tetromino::left()
@@ -161,6 +165,10 @@ void Tetromino::up()
 void Tetromino::down()
 {
     step_extra += 1;
+    if (board->has_collision(blocks, _steps(), cur_x)) {
+        board->add_blocks(blocks, _steps() - 1, cur_x, color_id);
+        reset();
+    }
 }
 
 int Tetromino::_steps()
