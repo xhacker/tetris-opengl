@@ -15,6 +15,8 @@ private:
     
 public:
     Board();
+    void reset();
+
     int num_of_points = 0;
     bool has_collision(bool tetro_blocks[4][4], int steps, int cur_x);
     void add_blocks(bool tetro_blocks[4][4], int steps, int cur_x, int color_id);

@@ -16,11 +16,17 @@ using namespace std;
 
 Board::Board()
 {
+    reset();
+}
+
+void Board::reset()
+{
     for (int y = 0; y < 20; ++y) {
         for (int x = 0; x < 10; ++x) {
             blocks[y][x] = kBlockEmpty;
         }
     }
+    num_of_points = 0;
 }
 
 bool Board::has_collision(bool tetro_blocks[4][4], int steps, int cur_x)

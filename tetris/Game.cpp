@@ -19,11 +19,9 @@ void Game::run(int argc, char **argv)
     timeval t;
     gettimeofday(&t, NULL);
     srand((unsigned)(t.tv_sec * 1000 + t.tv_usec));
-    
-    tetromino.interval = kDefaultInterval;
+
     tetromino.game = singleton;
     tetromino.board = &board;
-    tetromino.reset();
     
     glutInit(&argc, argv);
 #ifdef __APPLE__
@@ -37,7 +35,8 @@ void Game::run(int argc, char **argv)
 #ifndef __APPLE__
     glewInit();
 #endif
-    
+
+    reset();
     init();
     
     glutDisplayFunc(display);
@@ -45,8 +44,6 @@ void Game::run(int argc, char **argv)
     glutIdleFunc(idle);
     
     glutMainLoop();
-    
-    start_time = clock();
 }
 
 void Game::init()
@@ -88,6 +85,13 @@ void Game::init()
     glClearColor(1.0, 1.0, 1.0, 1.0);
 }
 
+void Game::reset()
+{
+    tetromino.interval = kDefaultInterval;
+    tetromino.reset();
+    board.reset();
+}
+
 void Game::display()
 {
     glClear(GL_COLOR_BUFFER_BIT);
@@ -95,14 +99,14 @@ void Game::display()
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     glEnable(GL_CULL_FACE);
     
-    // Draw grids
+    // draw grids
     glDrawArrays(GL_LINES, 0, kNumOfHPoints + kNumOfVPoints);
     
-    // Draw current tetromino
+    // draw current tetromino
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
     glDrawArrays(GL_TRIANGLE_STRIP, kBeginTetrominoPoints, kNumOfTetrominoPoints);
     
-    // Draw bottom blocks
+    // draw bottom blocks
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
     glDrawArrays(GL_TRIANGLE_STRIP, kBeginBoardPoints, singleton->board.num_of_points);
     
@@ -126,6 +130,9 @@ void Game::keyboard(int key, int x, int y)
             break;
         case 'w': case 'W':
             singleton->tetromino.up();
+            break;
+        case 'r': case 'R':
+            singleton->reset();
             break;
         case 'q': case 'Q':
         case kKeyCodeESC: case kKeyCodeESC2:

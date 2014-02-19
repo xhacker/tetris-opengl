@@ -19,13 +19,13 @@ class Tetromino;
 class Game {
     
 private:
-    clock_t start_time;
     bool is_game_over;
     Tetromino tetromino;
     Board board;
     
 protected:
     void init();
+    void reset();
     static void display();
     static void keyboard(int key, int x, int y);
     static void idle();
