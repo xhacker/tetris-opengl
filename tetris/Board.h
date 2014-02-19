@@ -19,6 +19,7 @@ public:
 
     int num_of_points = 0;
     bool has_collision(bool tetro_blocks[4][4], int steps, int cur_x);
+    bool top_reached(bool tetro_blocks[4][4], int steps);
     void add_blocks(bool tetro_blocks[4][4], int steps, int cur_x, int color_id);
 
     void write_buffer();

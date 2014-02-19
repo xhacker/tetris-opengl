@@ -75,6 +75,26 @@ bool Board::has_collision(bool tetro_blocks[4][4], int steps, int cur_x)
     return false;
 }
 
+bool Board::top_reached(bool tetro_blocks[4][4], int steps)
+{
+    int top_most = INFINITY;
+    for (int y = 0; y < 4; ++y) {
+        for (int x = 0; x < 4; ++x) {
+            if (tetro_blocks[y][x]) {
+                if (y < top_most) {
+                    top_most = y;
+                }
+            }
+        }
+    }
+
+    if (steps + top_most <= 0) {
+        return true;
+    }
+
+    return false;
+}
+
 void Board::add_blocks(bool tetro_blocks[4][4], int steps, int cur_x, int color_id)
 {
     for (int y = 0; y < 4; ++y) {

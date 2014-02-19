@@ -9,6 +9,7 @@
 #include "Game.h"
 #include "constants.h"
 #include <sys/time.h>
+#include <unistd.h>
 
 Game *Game::singleton = NULL;
 
@@ -149,6 +150,7 @@ void Game::idle()
 
         glutPostRedisplay();
     }
+    usleep(20);
 }
 
 void Game::game_over()

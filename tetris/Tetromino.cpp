@@ -191,7 +191,7 @@ void Tetromino::write_buffer()
     int steps = _steps();
     
     if (board->has_collision(blocks, steps, cur_x)) {
-        if (steps <= -2) {
+        if (board->top_reached(blocks, steps)) {
             game->game_over();
             return;
         }
