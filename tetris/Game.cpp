@@ -41,7 +41,8 @@ void Game::run(int argc, char **argv)
     init();
 
     glutDisplayFunc(display);
-    glutSpecialFunc(keyboard);
+    glutKeyboardFunc(keyboard);
+    glutSpecialFunc(special);
     glutIdleFunc(idle);
 
     glutMainLoop();
@@ -116,7 +117,7 @@ void Game::display()
     glutSwapBuffers();
 }
 
-void Game::keyboard(int key, int x, int y)
+void Game::keyboard(unsigned char key, int x, int y)
 {
     switch (key) {
         case GLUT_KEY_LEFT:
@@ -142,6 +143,11 @@ void Game::keyboard(int key, int x, int y)
             exit(EXIT_SUCCESS);
             break;
     }
+}
+
+void Game::special(int key, int x, int y)
+{
+    singleton->keyboard(key, x, y);
 }
 
 void Game::idle()

@@ -27,7 +27,8 @@ protected:
     void init();
     void reset();
     static void display();
-    static void keyboard(int key, int x, int y);
+    static void keyboard(unsigned char key, int x, int y);
+    static void special(int key, int x, int y);
     static void idle();
     
 public:
