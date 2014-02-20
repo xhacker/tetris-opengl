@@ -61,7 +61,7 @@ void Game::init()
 
     vec4 colors[kTotalPoints];
     for (int i = 0; i < kNumOfHPoints + kNumOfVPoints; ++i) {
-        colors[i] = vec4(0.8, 0.8, 0.8, 1.0);
+        colors[i] = vec4(0.93, 0.93, 0.93, 1.0);
     }
 
     GLuint vaoID;

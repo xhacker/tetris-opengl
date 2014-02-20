@@ -69,7 +69,7 @@ void Tetromino::reset()
     shape = (Shape)(rand() % NUM_OF_SHAPES);
     memcpy(blocks, shapes[shape * 4], 4 * 4);
 
-    color_id = rand() % kNumOfColors;
+    color_id = (color_id + 1) % kNumOfColors;
     
     gettimeofday(&start_time, NULL);
 

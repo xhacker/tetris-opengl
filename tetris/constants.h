@@ -35,19 +35,20 @@ const float W = 0.82;
 const float BLOCK_H = H / 10;
 const float BLOCK_W = W / 5;
 
-const int kNumOfColors = 5;
+const int kNumOfColors = 6;
 const vec4 kDefaultColors[kNumOfColors] =
 {
     vec4(.37, .62, .95, 1.0), // blue
     vec4(.39, .84, .29, 1.0), // green
     vec4(.95, .28, .25, 1.0), // red
-    vec4(.55, .36, .90, 1.0), // purple
+    vec4(.75, .37, .99, 1.0), // purple
     vec4(.97, .57, .22, 1.0), // orange
+    vec4(.99, .37, .61, 1.0), // pink
 };
 
 const int kBlockEmpty = -1;
 
-const double kDefaultInterval = 400;
+const double kDefaultInterval = 623;
 const double kIntervalSpeedUp = 1.1;
 const double kMinimumInterval = 100;
 
