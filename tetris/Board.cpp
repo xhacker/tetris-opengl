@@ -106,6 +106,8 @@ void Board::add_blocks(bool tetro_blocks[4][4], int steps, int cur_x, int color_
                 }
                 blocks[steps + y][cur_x + x] = color_id;
 
+                assert(0 <= color_id && color_id < kNumOfColors);
+
                 assert(steps + y >= 0);
                 assert(steps + y < 20);
                 assert(cur_x + x >= 0);
@@ -126,7 +128,9 @@ void Board::add_blocks(bool tetro_blocks[4][4], int steps, int cur_x, int color_
 
         if (full) {
             for (int i = y; i > 0; --i) {
-                memcpy(blocks[i], blocks[i - 1], 10 * sizeof(int));
+                for (int x = 0; x < 10; ++x) {
+                    blocks[i][x] = blocks[i - 1][x];
+                }
             }
             for (int i = 0; i < 10; ++i) {
                 blocks[0][i] = kBlockEmpty;
@@ -151,7 +155,10 @@ void Board::write_buffer()
 
                 vec4 color = kDefaultColors[blocks[i][j]];
                 vec4 colors[4] = {color, color, color, color};
-                glBufferSubData(GL_ARRAY_BUFFER, kTotalPoints * sizeof(vec2) + (kBeginBoardPoints + 4 * current) * sizeof(vec4), sizeof(colors), colors);
+
+                assert(0 <= blocks[i][j] && blocks[i][j] < kNumOfColors);
+
+                glBufferSubData(GL_ARRAY_BUFFER, kColorsOffset + (kBeginBoardPoints + 4 * current) * sizeof(vec4), sizeof(colors), colors);
 
                 current += 1;
             }

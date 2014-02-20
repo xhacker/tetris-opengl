@@ -30,6 +30,8 @@ const int kMaxBoardPoints = 800;
 
 const int kTotalPoints = kNumOfHPoints + kNumOfVPoints + kNumOfTetrominoPoints + kMaxBoardPoints;
 
+const int kColorsOffset = kTotalPoints * sizeof(vec2);
+
 const float H = 0.9;
 const float W = 0.82;
 const float BLOCK_H = H / 10;

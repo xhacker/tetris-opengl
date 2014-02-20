@@ -73,7 +73,7 @@ void Game::init()
     glBindBuffer(GL_ARRAY_BUFFER, vboID);
     glBufferData(GL_ARRAY_BUFFER, sizeof(points) + sizeof(colors), NULL, GL_STATIC_DRAW);
     glBufferSubData(GL_ARRAY_BUFFER, 0, kTotalPoints * sizeof(vec2), points);
-    glBufferSubData(GL_ARRAY_BUFFER, kTotalPoints * sizeof(vec2), sizeof(colors), colors);
+    glBufferSubData(GL_ARRAY_BUFFER, kColorsOffset, sizeof(colors), colors);
 
     GLuint program = InitShader("vshader.glsl", "fshader.glsl");
     GLuint vPosition = glGetAttribLocation(program, "vPosition");
@@ -82,7 +82,7 @@ void Game::init()
 
     GLuint vColor = glGetAttribLocation(program, "vColor");
     glEnableVertexAttribArray(vColor);
-    glVertexAttribPointer(vColor, 4, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(sizeof(points)));
+    glVertexAttribPointer(vColor, 4, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(kColorsOffset));
 
     glClearColor(1.0, 1.0, 1.0, 1.0);
 }

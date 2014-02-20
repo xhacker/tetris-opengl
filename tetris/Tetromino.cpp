@@ -219,7 +219,7 @@ void Tetromino::write_buffer()
 
                 vec4 color = kDefaultColors[color_id];
                 vec4 colors[4] = {color, color, color, color};
-                glBufferSubData(GL_ARRAY_BUFFER, kTotalPoints * sizeof(vec2) + (kBeginTetrominoPoints + 4 * current) * sizeof(vec4), sizeof(colors), colors);
+                glBufferSubData(GL_ARRAY_BUFFER, kColorsOffset + (kBeginTetrominoPoints + 4 * current) * sizeof(vec4), sizeof(colors), colors);
 
                 current += 1;
             }

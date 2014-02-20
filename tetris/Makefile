@@ -26,7 +26,7 @@ CC= g++
 EXECUTABLE= tetris
 
 # Linux (default)
-CFLAGS= -O3 -g -Wall -pedantic -Wno-unused-result -DGL_GLEXT_PROTOTYPES
+CFLAGS= -O0 -g -Wall -pedantic -Wno-unused-result -DGL_GLEXT_PROTOTYPES
 LDFLAGS= -lGL -lglut -lGLEW -lXext -lX11 -lm
 
 # OS X
