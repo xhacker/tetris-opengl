@@ -98,21 +98,45 @@ void Game::reset()
 
 void Game::display()
 {
-    glClear(GL_COLOR_BUFFER_BIT);
+    if (singleton->is_game_over) {
+        glRasterPos2f(-0.5, 0.1);
+        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, 'G');
+        glRasterPos2f(-0.2, 0.1);
+        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, 'A');
+        glRasterPos2f(0.1, 0.1);
+        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, 'M');
+        glRasterPos2f(0.4, 0.1);
+        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, 'E');
 
-    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-    glEnable(GL_CULL_FACE);
+        glRasterPos2f(-0.5, -0.2);
+        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, 'O');
+        glRasterPos2f(-0.2, -0.2);
+        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, 'V');
+        glRasterPos2f(0.1, -0.2);
+        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, 'E');
+        glRasterPos2f(0.4, -0.2);
+        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, 'R');
+    }
+    else {
+        singleton->tetromino.write_buffer();
+        singleton->board.write_buffer();
 
-    // draw grids
-    glDrawArrays(GL_LINES, 0, kNumOfHPoints + kNumOfVPoints);
+        glClear(GL_COLOR_BUFFER_BIT);
 
-    // draw current tetromino
-    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-    glDrawArrays(GL_TRIANGLE_STRIP, kBeginTetrominoPoints, kNumOfTetrominoPoints);
+        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+        glEnable(GL_CULL_FACE);
 
-    // draw bottom blocks
-    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-    glDrawArrays(GL_TRIANGLE_STRIP, kBeginBoardPoints, singleton->board.num_of_points);
+        // draw grids
+        glDrawArrays(GL_LINES, 0, kNumOfHPoints + kNumOfVPoints);
+
+        // draw current tetromino
+        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+        glDrawArrays(GL_TRIANGLE_STRIP, kBeginTetrominoPoints, kNumOfTetrominoPoints);
+
+        // draw bottom blocks
+        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+        glDrawArrays(GL_TRIANGLE_STRIP, kBeginBoardPoints, singleton->board.num_of_points);
+    }
 
     glutSwapBuffers();
 }
@@ -152,13 +176,8 @@ void Game::special(int key, int x, int y)
 
 void Game::idle()
 {
-    if (!singleton->is_game_over) {
-        singleton->tetromino.write_buffer();
-        singleton->board.write_buffer();
-
-        glutPostRedisplay();
-    }
     usleep(20);
+    glutPostRedisplay();
 }
 
 void Game::game_over()
