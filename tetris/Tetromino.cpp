@@ -51,6 +51,11 @@ const bool shapes[28][4] =
     {0, 0, 0, 0},
 };
 
+Tetromino::Tetromino()
+{
+    color_id = rand() % kNumOfColors;
+}
+
 inline double Tetromino::elapsed() const
 {
     timeval t;
@@ -67,7 +72,12 @@ void Tetromino::reset()
     cur_x = 3; // shape outer bound is 4x4
     step_extra = -2;
     shape = (Shape)(rand() % NUM_OF_SHAPES);
-    memcpy(blocks, shapes[shape * 4], 4 * 4);
+
+    for (int y = 0; y < 4; ++y) {
+        for (int x = 0; x < 4; ++x) {
+            blocks[y][x] = shapes[shape * 4 + y][x];
+        }
+    }
 
     color_id = (color_id + 1) % kNumOfColors;
     
@@ -135,7 +145,11 @@ void Tetromino::_rotate_ccw()
     }
 
     if (!board->has_collision(new_blocks, _steps(), cur_x)) {
-        memcpy(blocks, new_blocks, 4 * 4);
+        for (int y = 0; y < 4; ++y) {
+            for (int x = 0; x < 4; ++x) {
+                blocks[y][x] = new_blocks[y][x];
+            }
+        }
     }
     else {
         rotation_count -= 1;

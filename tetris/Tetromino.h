@@ -38,6 +38,8 @@ public:
     Board *board;
     double interval;
     
+    Tetromino();
+    
     void reset();
     
     void left();
