@@ -183,7 +183,7 @@ void Tetromino::_add_blocks()
 
 int Tetromino::_steps()
 {
-    return elapsed() / interval + step_extra;
+    return ceil(elapsed() / interval + step_extra);
 }
 
 void Tetromino::write_buffer()
