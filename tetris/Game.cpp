@@ -16,14 +16,14 @@ Game *Game::singleton = NULL;
 void Game::run(int argc, char **argv)
 {
     singleton = this;
-    
+
     timeval t;
     gettimeofday(&t, NULL);
     srand((unsigned)(t.tv_sec * 1000 + t.tv_usec));
 
     tetromino.game = singleton;
     tetromino.board = &board;
-    
+
     glutInit(&argc, argv);
 #ifdef __APPLE__
     glutInitDisplayMode(GLUT_3_2_CORE_PROFILE | GLUT_RGBA | GLUT_DOUBLE);
@@ -39,11 +39,11 @@ void Game::run(int argc, char **argv)
 
     reset();
     init();
-    
+
     glutDisplayFunc(display);
     glutSpecialFunc(keyboard);
     glutIdleFunc(idle);
-    
+
     glutMainLoop();
 }
 
@@ -75,13 +75,13 @@ void Game::init()
     glBufferSubData(GL_ARRAY_BUFFER, kTotalPoints * sizeof(vec2), sizeof(colors), colors);
 
     GLuint program = InitShader("vshader.glsl", "fshader.glsl");
-	GLuint vPosition = glGetAttribLocation(program, "vPosition");
-	glEnableVertexAttribArray(vPosition);
-	glVertexAttribPointer(vPosition, 2, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0));
+    GLuint vPosition = glGetAttribLocation(program, "vPosition");
+    glEnableVertexAttribArray(vPosition);
+    glVertexAttribPointer(vPosition, 2, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0));
 
     GLuint vColor = glGetAttribLocation(program, "vColor");
-	glEnableVertexAttribArray(vColor);
-	glVertexAttribPointer(vColor, 4, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(sizeof(points)));
+    glEnableVertexAttribArray(vColor);
+    glVertexAttribPointer(vColor, 4, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(sizeof(points)));
 
     glClearColor(1.0, 1.0, 1.0, 1.0);
 }
@@ -100,18 +100,18 @@ void Game::display()
 
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     glEnable(GL_CULL_FACE);
-    
+
     // draw grids
     glDrawArrays(GL_LINES, 0, kNumOfHPoints + kNumOfVPoints);
-    
+
     // draw current tetromino
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
     glDrawArrays(GL_TRIANGLE_STRIP, kBeginTetrominoPoints, kNumOfTetrominoPoints);
-    
+
     // draw bottom blocks
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
     glDrawArrays(GL_TRIANGLE_STRIP, kBeginBoardPoints, singleton->board.num_of_points);
-    
+
     glutSwapBuffers();
 }
 

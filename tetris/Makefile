@@ -25,7 +25,7 @@ CC= g++
 # The flags that will be used to compile the object file.
 # If you want to debug your program,
 # you can add '-g' on the following line
-CFLAGS= -O3 -g -Wall -pedantic -DGL_GLEXT_PROTOTYPES
+CFLAGS= -O3 -g -Wall -pedantic -std=gnu++11 -Wno-deprecated-declarations -DGL_GLEXT_PROTOTYPES
 
 # The name of the final executable
 EXECUTABLE= tetris
@@ -34,10 +34,10 @@ EXECUTABLE= tetris
 # to your program here
 
 # Linux (default)
-LDFLAGS = -lGL -lglut -lGLEW -lXext -lX11 -lm
+# LDFLAGS = -lGL -lglut -lGLEW -lXext -lX11 -lm
 
 # OS X
-# LDFLAGS = -framework OpenGL -framework GLUT
+LDFLAGS = -framework OpenGL -framework GLUT
 
 # If you have other library files in a different directory add them here
 INCLUDEFLAG= -I. -I$(INCLUDEDIR) -Iinclude/
