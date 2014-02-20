@@ -71,7 +71,8 @@ void Game::init()
     GLuint vboID;
     glGenBuffers(1, &vboID);
     glBindBuffer(GL_ARRAY_BUFFER, vboID);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(points) + sizeof(colors), points, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(points) + sizeof(colors), NULL, GL_STATIC_DRAW);
+    glBufferSubData(GL_ARRAY_BUFFER, 0, kTotalPoints * sizeof(vec2), points);
     glBufferSubData(GL_ARRAY_BUFFER, kTotalPoints * sizeof(vec2), sizeof(colors), colors);
 
     GLuint program = InitShader("vshader.glsl", "fshader.glsl");
