@@ -121,7 +121,10 @@ void Tetromino::_rotate_ccw()
             if (blocks[y][x]) {
                 int new_y = 1 - (x - 2);
                 int new_x = 2 + (y - 1);
-                new_blocks[new_y][new_x] = 1;
+                if (0 <= new_y && new_y < 4 &&
+                    0 <= new_x && new_x < 4) {
+                    new_blocks[new_y][new_x] = 1;
+                }
 
                 assert(new_y >= 0);
                 assert(new_y < 4);

@@ -31,9 +31,9 @@ void Board::reset()
 
 bool Board::has_collision(bool tetro_blocks[4][4], int steps, int cur_x)
 {
-    int left_most = INFINITY;
-    int right_most = -INFINITY;
-    int bottom_most = -INFINITY;
+    int left_most = 999;
+    int right_most = -999;
+    int bottom_most = -999;
     for (int y = 0; y < 4; ++y) {
         for (int x = 0; x < 4; ++x) {
             if (tetro_blocks[y][x]) {
@@ -78,7 +78,7 @@ bool Board::has_collision(bool tetro_blocks[4][4], int steps, int cur_x)
 
 bool Board::top_reached(bool tetro_blocks[4][4], int steps)
 {
-    int top_most = INFINITY;
+    int top_most = 999;
     for (int y = 0; y < 4; ++y) {
         for (int x = 0; x < 4; ++x) {
             if (tetro_blocks[y][x]) {

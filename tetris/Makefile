@@ -22,22 +22,16 @@ SOURCE= Tetris.cpp Game.cpp Board.cpp Tetromino.cpp include/InitShader.cpp
 # The compiler we are using
 CC= g++
 
-# The flags that will be used to compile the object file.
-# If you want to debug your program,
-# you can add '-g' on the following line
-CFLAGS= -O3 -g -Wall -pedantic -std=gnu++11 -Wno-deprecated-declarations -DGL_GLEXT_PROTOTYPES
-
 # The name of the final executable
 EXECUTABLE= tetris
 
-# The basic library we are using add the other libraries you want to link
-# to your program here
-
 # Linux (default)
-# LDFLAGS = -lGL -lglut -lGLEW -lXext -lX11 -lm
+CFLAGS= -O3 -g -Wall -pedantic -Wno-unused-result -DGL_GLEXT_PROTOTYPES
+LDFLAGS= -lGL -lglut -lGLEW -lXext -lX11 -lm
 
 # OS X
-LDFLAGS = -framework OpenGL -framework GLUT
+# CFLAGS= -O3 -g -Wall -pedantic -std=gnu++11 -Wno-deprecated-declarations -DGL_GLEXT_PROTOTYPES
+# LDFLAGS = -framework OpenGL -framework GLUT
 
 # If you have other library files in a different directory add them here
 INCLUDEFLAG= -I. -I$(INCLUDEDIR) -Iinclude/
